@@ -1,5 +1,7 @@
-import styles from "./Header.module.css";
+"use client";
 import Link from "next/link";
+import { useState } from "react";
+import { AiOutlineSearch, FiMenu, RxCross2 } from "react-icons/all";
 
 const links = [
   {
@@ -21,14 +23,31 @@ const links = [
 ];
 
 export default function Header() {
+  const [showMenu, setShowMenu] = useState(false);
   return (
-    <header className="header">
-      <div className="logo"></div>
+    <header className="header container">
+      <div className="logo">
+        <h1>MJ</h1>
+      </div>
+      <form className="search">
+        <input type="text" placeholder="Buscar" />
+        <button type="submit">
+          <AiOutlineSearch />
+        </button>
+      </form>
       <nav>
-        <ul className="navbar">
-          {links.map((link) => (
+        {showMenu ? (
+          <RxCross2 onClick={() => setShowMenu(!showMenu)} />
+        ) : (
+          <FiMenu onClick={() => setShowMenu(!showMenu)} />
+        )}
+
+        <ul className={`navbar ${showMenu ? "active" : ""}`}>
+          {links.map((link, index) => (
             <li className="nav__item">
-              <Link href={link.route}>{link.label}</Link>
+              <Link key={index} href={link.route}>
+                {link.label}
+              </Link>
             </li>
           ))}
         </ul>
