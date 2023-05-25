@@ -44,10 +44,8 @@ export default function Header() {
 
         <ul className={`navbar ${showMenu ? "active" : ""}`}>
           {links.map((link, index) => (
-            <li className="nav__item">
-              <Link key={index} href={link.route}>
-                {link.label}
-              </Link>
+            <li className="nav__item" key={index}>
+              <Link href={link.route}>{link.label}</Link>
             </li>
           ))}
         </ul>
