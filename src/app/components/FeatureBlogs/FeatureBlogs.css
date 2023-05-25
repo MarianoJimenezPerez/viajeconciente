@@ -1,68 +1,65 @@
-.feature__blogs__container{
-    background-color: #EFF3F5;
-    padding: 60px 0;
+.feature__blogs__container {
+  background-color: #eff3f5;
+  padding: 60px 0;
 }
-.feature__blogs{
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    column-gap: 40px;
+.feature__blogs {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  column-gap: 40px;
 }
-.feature__blog{
-    display: flex;
-    gap: 20px;
-    transition: var(--transition);
+.feature__blog {
+  display: flex;
+  gap: 20px;
+  transition: var(--transition);
 }
-.feature__blog:hover{
-    transform: translateY(-10px);
+.feature__blog:hover {
+  transform: translateY(-10px);
 }
-.feature__blog__img{
-    width: 100%;
+.feature__blog__img {
+  width: 100%;
 }
-.feature__blog__img img{
-    object-fit: cover;
-    width: 100%;
-    height: 100%;
+.feature__blog__img img {
+  object-fit: cover;
+  width: 100%;
+  height: 100%;
 }
-.feature__blog__content{
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    gap: 20px;
-    padding: 15px 0;
+.feature__blog__content {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 20px;
+  padding: 15px 0;
 }
-.feature__blog__content h4{
-    
+.feature__blog__content h4 {
+  transition: var(--transition);
 }
-.feature__blog__content p{
-    font-size: 0.8rem;
+.feature__blog__content h4:hover {
+  color: var(--orange);
+  text-decoration: underline;
+  text-decoration-style: double;
 }
-.feature__blog__content p a{
-    color: var(--orange);
-    cursor: pointer;
+.feature__blog__content p {
+  font-size: 0.8rem;
 }
-.feature__blog__content p a:hover{
-    text-decoration: underline;
+.feature__blog__content p a {
+  color: var(--orange);
+  cursor: pointer;
+}
+.feature__blog__content p a:hover {
+  text-decoration: underline;
 }
 
 /* ########### MEDIAS QUERY ###########*/
 
-@media screen and (max-width: 1366px) {
-    
+@media screen and (max-width: 1140px) {
+  .feature__blogs {
+    grid-template-columns: repeat(2, 1fr);
+    row-gap: 40px;
   }
-  
-  @media screen and (max-width: 1140px) {
-    .feature__blogs{
-        grid-template-columns: repeat(2, 1fr);
-        row-gap: 40px;
-    }
+}
+
+@media screen and (max-width: 768px) {
+  .feature__blogs {
+    grid-template-columns: 1fr;
   }
-  
-  @media screen and (max-width: 768px) {
-    .feature__blogs{
-        grid-template-columns: 1fr;
-    }
-  }
-  @media screen and (max-width: 540px) {
-    
-  }
-  
+}
