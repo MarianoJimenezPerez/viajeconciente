@@ -26,9 +26,35 @@
 .categories .container .left .categorie__blogs__container .blog .blog__img {
   position: relative;
 }
+.categories
+  .container
+  .left
+  .categorie__blogs__container
+  .blog
+  .blog__img::after {
+  content: "";
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  background-color: rgba(0, 0, 0, 0.3);
+  -webkit-box-shadow: inset 0px -88px 122px -6px rgba(0, 0, 0, 0.6);
+  -moz-box-shadow: inset 0px -88px 122px -6px rgba(0, 0, 0, 0.6);
+  box-shadow: inset 0px -88px 122px -6px rgba(0, 0, 0, 0.6);
+}
 .categories .container .left .categorie__blogs__container .blog .blog__img img {
   object-fit: cover;
   width: 100%;
+}
+.categories
+  .container
+  .left
+  .categorie__blogs__container
+  .blog
+  .blog__img
+  span {
+  z-index: 2;
 }
 .categories
   .container

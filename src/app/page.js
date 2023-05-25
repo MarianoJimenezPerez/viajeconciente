@@ -2,6 +2,8 @@ import Hero from "./components/Hero/Hero";
 import FeatureBlogs from "./components/FeatureBlogs/FeatureBlogs";
 import AddSpace from "./components/AddSpace/AddSpace";
 import Categories from "./components/Categories/Categories";
+import CategorySlider from "./components/CategorySlider/CategorySlider";
+import News from "./components/News/News";
 
 export default function HomePage() {
   return (
@@ -9,7 +11,9 @@ export default function HomePage() {
       <Hero />
       <FeatureBlogs />
       <AddSpace />
-      <Categories />
+      <Categories />+
+      <CategorySlider />
+      <News />
     </main>
   );
 }
