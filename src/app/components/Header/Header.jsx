@@ -27,7 +27,7 @@ export default function Header() {
   return (
     <header className="header container">
       <div className="logo">
-        <h1>MJ</h1>
+        <h1>VC</h1>
       </div>
       <form className="search">
         <input type="text" placeholder="Buscar" />

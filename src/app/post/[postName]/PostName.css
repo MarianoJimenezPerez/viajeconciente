@@ -1,0 +1,73 @@
+.post__page {
+  padding: 50px 0;
+}
+.post__page .container {
+  display: flex;
+  gap: 10%;
+}
+.post__page .container .left {
+  display: flex;
+  flex-direction: column;
+  gap: 40px;
+  width: 60%;
+}
+.post__page .container .left .post__heading {
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+}
+.post__page .container .left .post__heading img {
+  width: 100%;
+  object-fit: cover;
+}
+.post__page .container .left .post__heading .breadcrumb span a {
+  color: var(--orange);
+  transition: var(--transition);
+}
+.post__page .container .left .post__heading .breadcrumb span a:hover {
+  text-decoration: underline;
+  text-decoration-style: double;
+}
+.post__page .container .left .post__heading .post__details {
+  display: flex;
+  gap: 20px;
+  flex-wrap: wrap;
+  font-size: 0.9rem;
+  color: var(--gray);
+}
+.post__page .container .left .post__heading .post__details a {
+  color: var(--orange);
+  transition: var(--transition);
+}
+.post__page .container .left .post__heading .post__details a:hover {
+  text-decoration: underline;
+  text-decoration-style: double;
+}
+.post__page .container .right {
+  display: flex;
+  flex-direction: column;
+  gap: 40px;
+  width: 30%;
+}
+.post__page .container .right h6{
+  font-size: 1.8rem;
+  font-weight: 500;
+}
+/* ########### MEDIAS QUERY ###########*/
+
+
+@media screen and (max-width: 1140px) {
+  .post__page {
+    padding: 30px 0;
+  }
+  .post__page .container {
+    flex-direction: column;
+    gap: 50px;
+  }
+  .post__page .container .left {
+    width: 100%;
+  }
+  .post__page .container .right {
+    width: 100%;
+  }
+}

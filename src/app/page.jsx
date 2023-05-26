@@ -14,6 +14,7 @@ export default function HomePage() {
       <Categories />+
       <CategorySlider />
       <News />
+      <AddSpace />
     </main>
   );
 }

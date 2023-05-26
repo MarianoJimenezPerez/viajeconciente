@@ -202,7 +202,7 @@ a {
     display: none;
   }
   /*#########*/
-  .hero .blog__card h3 {
+  .container .hero .left .blog__card h3 {
     font-size: 1rem;
   }
   .container .hero .left .blog__card-big h3 {
@@ -224,7 +224,7 @@ a {
   .container .hero .right {
     width: 100%;
   }
-  .hero .blog__card h3 {
+  .container .hero .left .blog__card h3 {
     font-size: 2rem;
   }
 }
@@ -233,7 +233,7 @@ a {
   .container {
     width: var(--container-width-md);
   }
-  .hero .blog__card h3 {
+  .container .hero .left .blog__card h3 {
     font-size: 1.5rem;
   }
 }
@@ -277,7 +277,7 @@ a {
     color: var(--black);
   }
   /*#########*/
-  .hero .blog__card h3 {
+  .container .hero .left .blog__card h3 {
     font-size: 1.2rem;
   }
 }

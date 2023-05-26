@@ -1,0 +1,29 @@
+.search__page {
+  padding: 50px 0;
+}
+.search__page .container {
+  display: flex;
+  gap: 40px;
+}
+.search__page .container .left {
+  width: 70%;
+}
+.search__page .container .right {
+  width: 30%;
+}
+/* ########### MEDIAS QUERY ###########*/
+
+@media screen and (max-width: 1140px) {
+  .search__page {
+    padding: 30px 0;
+  }
+  .search__page .container {
+    flex-direction: column;
+  }
+  .search__page .container .left {
+    width: 100%;
+  }
+  .search__page .container .right {
+    width: 100%;
+  }
+}

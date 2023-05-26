@@ -102,62 +102,8 @@
 }
 .categories .container .right {
   width: 30%;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  padding: 60px 30px;
-  background-color: #eff3f5;
-  height: max-content;
 }
 
-.categories .container .right img {
-}
-.categories .container .right h6 {
-  font-weight: 700;
-  font-size: 1.4rem;
-}
-.categories .container .right p {
-  text-align: center;
-}
-.categories .container .right .newsletter__form {
-  display: flex;
-  flex-direction: column;
-  gap: 15px;
-  width: 100%;
-}
-.categories .container .right .newsletter__form input {
-  border: none;
-  height: 40px;
-  font-size: 0.9rem;
-  outline: none;
-  padding: 25px 10px;
-  color: var(--gray);
-  width: 100%;
-}
-.categories .container .right .newsletter__form button {
-  border: none;
-  height: 40px;
-  font-size: 1.2rem;
-  outline: none;
-  padding: 25px 10px;
-  cursor: pointer;
-  color: var(--white);
-  background-color: var(--orange);
-  justify-content: center;
-  display: flex;
-  align-items: center;
-  text-align: center;
-  transition: var(--transition);
-}
-.categories .container .right .newsletter__form button:hover {
-  background-color: var(--yellow);
-}
-.categories .container .right .newsletter__form span {
-  text-align: center;
-  color: var(--turquoise);
-  font-weight: 500;
-}
 /* ########### MEDIAS QUERY ###########*/
 
 @media screen and (max-width: 1140px) {

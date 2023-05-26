@@ -1,3 +1,4 @@
+import NewsletterVertical from "../NewsletterVertical/NewsletterVertical";
 import "./Categories.css";
 export default function Categories() {
   return (
@@ -37,14 +38,7 @@ export default function Categories() {
           </div>
         </div>
         <div className="right">
-          <img src="https://avada.website/magazine/wp-content/uploads/sites/166/2023/03/newsletter-icon-200x159.png"></img>
-          <h6>News Via Inbox</h6>
-          <p>Nulla turp dis cursus. Integer liberos euismod pretium faucibua</p>
-          <form className="newsletter__form">
-            <input type="text" placeholder="Enter your email*" />
-            <button type="submit">Suscribe</button>
-            <span>Advice</span>
-          </form>
+          <NewsletterVertical />
         </div>
       </div>
     </div>
