@@ -1,17 +1,64 @@
 "use client";
 
-import { useRef } from "react";
+import { useGlobalContext } from "../context/context";
+import { useRouter } from "next/navigation";
+import { useEffect, useRef, useState } from "react";
 import { Editor } from "@tinymce/tinymce-react";
 import { AiOutlineCloudUpload } from "react-icons/all";
+import axios from "axios";
+import moment from "moment/moment";
 import "./Nuevo.css";
 
 export default function NuevoPage() {
+  const { currentUser } = useGlobalContext();
+  const router = useRouter();
+  const [dbCats, setDbCats] = useState([]);
+
+  const [value, setValue] = useState("");
+  const [title, setTitle] = useState("");
+  const [file, setFile] = useState(null);
+  const [cat, setCat] = useState("");
+
+  if (currentUser === null) {
+    router.push("/");
+  }
+
+  useEffect(() => {
+    const getCats = async () => {
+      try {
+        const res = await axios.get("http://localhost:8080/api/categories");
+        setDbCats(res.data);
+      } catch (error) {
+        console.log(error);
+      }
+    };
+    getCats();
+  }, []);
+
   const editorRef = useRef(null);
-  const log = () => {
-    if (editorRef.current) {
-      console.log(editorRef.current.getContent());
+
+  const handleClick = async (e) => {
+    e.preventDefault();
+    try {
+      const res = await axios.post(
+        "http://localhost:8080/api/posts",
+        {
+          title,
+          desc: editorRef.current.getContent(),
+          cat,
+          img: file ? "img" : "",
+          date: moment(Date.now()).format("YYYY-MM-DD HH:mm:ss"),
+        },
+        {
+          credentials: "include",
+          withCredentials: true,
+        }
+      );
+    } catch (error) {
+      console.log(error);
     }
   };
+
   return (
     <div className="new__page">
       <div className="container">
@@ -20,6 +67,7 @@ export default function NuevoPage() {
             type="text"
             placeholder="Título de post"
             id="titulo"
+            onChange={(e) => setTitle(e.target.value)}
             required
           />
           <div className="editor__container">
@@ -68,6 +116,7 @@ export default function NuevoPage() {
               type="file"
               name="imagen"
               id="imagen"
+              onChange={(e) => setFile(e.target.files[0])}
               required
             />
             <label
@@ -76,33 +125,30 @@ export default function NuevoPage() {
                 cursor: "pointer",
                 display: "flex",
                 alignItems: "center",
-                gap: "10px"
+                gap: "10px",
               }}
             >
-              <AiOutlineCloudUpload style={{fontSize: "2rem"}} /> Subir imagen
+              <AiOutlineCloudUpload style={{ fontSize: "2rem" }} /> Subir imagen
             </label>
           </div>
           <div className="box">
             <h2>Categoría</h2>
-            <div className="cat">
-              <input
-                type="radio"
-                name="cat"
-                value={"Tecnología"}
-                id="tecnologia"
-              />
-              <label htmlFor="tecnologia">Tecnología</label>
-            </div>
-
-            <div className="cat">
-              <input type="radio" name="cat" value={"Ciencia"} id="ciencia" />
-              <label htmlFor="ciencia">Ciencia</label>
-            </div>
-
-            <div className="cat">
-              <input type="radio" name="cat" value={"Viajes"} id="viajes" />
-              <label htmlFor="viajes">Viajes</label>
-            </div>
+            {dbCats &&
+              dbCats.map((cat) => (
+                <div className="cat" key={cat.id}>
+                  <input
+                    type="radio"
+                    name="cat"
+                    value={cat.id}
+                    id={cat.value}
+                    onChange={(e) => setCat(e.target.value)}
+                  />
+                  <label htmlFor={cat.value}>{cat.label}</label>
+                </div>
+              ))}
+          </div>
+          <div className="add">
+            <button onClick={handleClick}>Publicar</button>
           </div>
         </div>
       </div>

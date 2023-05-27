@@ -1,4 +1,5 @@
 "use client";
+import { useGlobalContext } from "@/app/context/context";
 import Link from "next/link";
 import { useState } from "react";
 import { AiOutlineSearch, FiMenu, RxCross2 } from "react-icons/all";
@@ -24,6 +25,7 @@ const links = [
 
 export default function Header() {
   const [showMenu, setShowMenu] = useState(false);
+  const { currentUser, logout } = useGlobalContext();
   return (
     <header className="header container">
       <div className="logo">
@@ -48,6 +50,13 @@ export default function Header() {
               <Link href={link.route}>{link.label}</Link>
             </li>
           ))}
+          {currentUser !== null ? (
+            <li onClick={logout} className="nav__item">
+              Logout
+            </li>
+          ) : (
+            ""
+          )}
         </ul>
       </nav>
     </header>

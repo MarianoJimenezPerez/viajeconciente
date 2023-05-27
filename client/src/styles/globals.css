@@ -108,6 +108,7 @@ a {
   border-bottom: 1px solid transparent;
   transition: var(--transition);
   font-size: 1.1rem;
+  cursor: pointer;
 }
 
 .header .navbar .nav__item:hover {

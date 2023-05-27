@@ -36,6 +36,21 @@
   gap: 10px;
   align-items: center;
 }
+.new__page .container .add button {
+  width: 100%;
+  padding: 15px 20px;
+  font-size: 1.2rem;
+  border: 1px solid transparent;
+  transition: var(--transition);
+  background-color: var(--orange);
+  color: var(--white);
+  cursor: pointer;
+}
+.new__page .container .add button:hover {
+  border: 1px solid var(--orange);
+  background-color: var(--white);
+  color: var(--orange);
+}
 
 /* ########### MEDIAS QUERY ###########*/
 
