@@ -1,0 +1,36 @@
+.error_page .container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  height: 60vh;
+  gap: 40px;
+  width: 30%;
+}
+.error_page .container button {
+  background-color: var(--white);
+  border: 1px solid var(--orange);
+  transition: var(--transition);
+  width: max-content;
+  padding: 10px 15px;
+}
+.error_page .container button:hover {
+  background-color: var(--orange);
+  border: 1px solid transparent;
+  color: var(--white);
+  cursor: pointer;
+}
+
+/* ########### MEDIAS QUERY ###########*/
+
+@media screen and (max-width: 1140px) {
+  .error_page .container {
+    width: 60%;
+  }
+}
+@media screen and (max-width: 768px) {
+  .error_page .container {
+    width: 100%;
+  }
+}
