@@ -1,0 +1,65 @@
+.register__page {
+}
+.register__page .container {
+  height: 60vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.register__page .container .form__box {
+  width: 40%;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: 40px;
+  padding: 0 80px;
+}
+.register__page .container .form__box h1 {
+  font-size: 2rem;
+}
+.register__page .container .form__box form {
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+}
+.register__page .container .form__box form input {
+  outline: none;
+  border: none;
+  border-bottom: 1px solid var(--orange);
+  padding: 10px 0 10px 10px;
+  font-size: 1.1rem;
+}
+.register__page .container .form__box form button {
+  width: max-content;
+  align-self: center;
+  padding: 10px 20px;
+  outline: none;
+  background-color: var(--orange);
+  color: var(--white);
+  transition: var(--transition);
+  border: 1px solid transparent;
+}
+.register__page .container .form__box form button:hover {
+  color: var(--black);
+  border: 1px solid var(--orange);
+  background-color: var(--white);
+}
+.register__page .container .form__box span {
+  color: var(--turquoise);
+  text-align: center;
+}
+
+/* ########### MEDIAS QUERY ###########*/
+
+@media screen and (max-width: 1140px) {
+  .register__page .container .form__box {
+    width: 50%;
+    padding: 0;
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .register__page .container .form__box {
+    width: 100%;
+  }
+}
