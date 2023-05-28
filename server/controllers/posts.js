@@ -13,8 +13,34 @@ export const getAllPosts = (req, res) => {
   });
 };
 
+export const getAllNews = (req, res) => {
+  const q = "SELECT * FROM posts WHERE tid = 1";
+
+  db.query(q, [], (err, data) => {
+    if (err) return res.status(409).json(err);
+
+    return res.status(200).json(data);
+  });
+};
+
+export const getAllBlogs = (req, res) => {
+  const q = "SELECT * FROM posts WHERE tid = 2";
+
+  db.query(q, [], (err, data) => {
+    if (err) return res.status(409).json(err);
+
+    return res.status(200).json(data);
+  });
+};
+
 export const getPost = (req, res) => {
-  return res.json("Desde el controller");
+  const q = "SELECT * FROM posts WHERE id = ?";
+
+  db.query(q, [req.params.id], (err, data) => {
+    if (err) return res.status(409).json(err);
+
+    return res.status(200).json(data);
+  });
 };
 
 export const addPost = (req, res) => {
@@ -26,7 +52,7 @@ export const addPost = (req, res) => {
     if (err) return res.status(403).json("El token no es valido");
 
     const q =
-      "INSERT INTO posts(`title`, `desc`, `img`, `date`, `uid`, `cid`) VALUES (?)";
+      "INSERT INTO posts(`title`, `desc`, `img`, `date`, `uid`, `cid`, `tid`) VALUES (?)";
 
     const values = [
       req.body.title,
@@ -35,6 +61,7 @@ export const addPost = (req, res) => {
       req.body.date,
       userInfo.id,
       req.body.cat,
+      req.body.type,
     ];
 
     db.query(q, [values], (err, data) => {

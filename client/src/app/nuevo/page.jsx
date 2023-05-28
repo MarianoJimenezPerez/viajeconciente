@@ -1,27 +1,55 @@
 "use client";
 
-import { useGlobalContext } from "../context/context";
-import { useRouter } from "next/navigation";
 import { useEffect, useRef, useState } from "react";
 import { Editor } from "@tinymce/tinymce-react";
 import { AiOutlineCloudUpload } from "react-icons/all";
 import axios from "axios";
 import moment from "moment/moment";
 import "./Nuevo.css";
+import { useGlobalContext } from "../context/context";
 
 export default function NuevoPage() {
-  const { currentUser } = useGlobalContext();
-  const router = useRouter();
   const [dbCats, setDbCats] = useState([]);
+  const [dbTypes, setDbTypes] = useState([]);
+  const { currentUser } = useGlobalContext();
 
-  const [value, setValue] = useState("");
   const [title, setTitle] = useState("");
   const [file, setFile] = useState(null);
   const [cat, setCat] = useState("");
+  const [type, setType] = useState(null);
 
-  if (currentUser === null) {
-    router.push("/");
-  }
+  const handleFileChange = (e) => {
+    const selectedFile = e.target.files[0];
+    if (selectedFile) {
+      const fileExtension = selectedFile.name.split(".").pop().toLowerCase();
+      if (
+        fileExtension === "jpg" ||
+        fileExtension === "jpeg" ||
+        fileExtension === "png"
+      ) {
+        setFile(selectedFile);
+      } else {
+        setFile(null);
+        console.log("Debe seleccionar un archivo valido");
+      }
+    }
+  };
+
+  const upload = async () => {
+    if (currentUser === null) return;
+    try {
+      const formData = new FormData();
+      formData.append("file", file);
+      const res = await axios.post(
+        "http://localhost:8080/api/upload",
+        formData,
+        { credentials: "include", withCredentials: true }
+      );
+      return res.data;
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
   useEffect(() => {
     const getCats = async () => {
@@ -35,10 +63,27 @@ export default function NuevoPage() {
     getCats();
   }, []);
 
+  useEffect(() => {
+    const getTypes = async () => {
+      try {
+        const res = await axios.get("http://localhost:8080/api/types");
+        setDbTypes(res.data);
+      } catch (error) {
+        console.log(error);
+      }
+    };
+    getTypes();
+  }, []);
+
   const editorRef = useRef(null);
 
   const handleClick = async (e) => {
     e.preventDefault();
+    if (!file) {
+      return console.log("Formato de archivo no valido");
+    }
+    const imageUrl = await upload();
+
     try {
       const res = await axios.post(
         "http://localhost:8080/api/posts",
@@ -46,8 +91,9 @@ export default function NuevoPage() {
           title,
           desc: editorRef.current.getContent(),
           cat,
-          img: file ? "img" : "",
+          img: imageUrl,
           date: moment(Date.now()).format("YYYY-MM-DD HH:mm:ss"),
+          type,
         },
         {
           credentials: "include",
@@ -116,7 +162,7 @@ export default function NuevoPage() {
               type="file"
               name="imagen"
               id="imagen"
-              onChange={(e) => setFile(e.target.files[0])}
+              onChange={handleFileChange}
               required
             />
             <label
@@ -132,7 +178,7 @@ export default function NuevoPage() {
             </label>
           </div>
           <div className="box">
-            <h2>Categoría</h2>
+            <h3>Categoría</h3>
             {dbCats &&
               dbCats.map((cat) => (
                 <div className="cat" key={cat.id}>
@@ -144,6 +190,22 @@ export default function NuevoPage() {
                     onChange={(e) => setCat(e.target.value)}
                   />
                   <label htmlFor={cat.value}>{cat.label}</label>
+                </div>
+              ))}
+          </div>
+          <div className="box">
+            <h3>Tipo</h3>
+            {dbTypes &&
+              dbTypes.map((type) => (
+                <div className="cat" key={type.id}>
+                  <input
+                    type="radio"
+                    name="type"
+                    value={type.id}
+                    id={type.value}
+                    onChange={(e) => setType(e.target.value)}
+                  />
+                  <label htmlFor={type.value}>{type.label}</label>
                 </div>
               ))}
           </div>
