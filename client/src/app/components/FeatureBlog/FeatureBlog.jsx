@@ -1,22 +1,22 @@
 import Link from "next/link";
 import "./FeatureBlog.css";
-export default function FeatureBlog() {
+import { formatText } from "@/app/utils";
+export default function FeatureBlog({ data }) {
+  const { title, clabel, img, slug } = data;
   return (
-    <Link href={"#"}>
-      <article className="feature__blog">
-        <div className="feature__blog__img">
-          <img
-            src="https://avada.website/magazine/wp-content/uploads/sites/166/2023/03/healthy-snacks-200x120.jpg"
-            alt="Sample"
-          />
-        </div>
-        <div className="feature__blog__content">
-          <h4>Easy & Healthy Snack Ideas To Keep You Energized</h4>
-          <p>
-            Categories: <Link href={"#"}>Food</Link>
-          </p>
-        </div>
-      </article>
-    </Link>
+    <article className="feature__blog">
+      <div className="feature__blog__img">
+        <img src={`http://localhost:3000/uploads/${img}`} alt="Sample" />
+      </div>
+      <div className="feature__blog__content">
+        <Link href={`/post/${slug}`}>
+          <h4>{formatText(title, 80)}</h4>
+        </Link>
+
+        <p>
+          Categories: <Link href={"#"}>{clabel}</Link>
+        </p>
+      </div>
+    </article>
   );
 }

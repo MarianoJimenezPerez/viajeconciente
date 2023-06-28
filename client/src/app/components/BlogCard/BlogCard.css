@@ -41,9 +41,18 @@
 .blog__card__h .blog__card__h__content .cta {
   cursor: pointer;
   text-decoration: underline;
-  color: var(--yellow);
+  color: var(--orange);
   transition: var(--transition);
 }
 .blog__card__h .blog__card__h__content.cta:hover {
   color: var(--orange);
+}
+
+/* ########### MEDIAS QUERY ###########*/
+
+@media screen and (max-width: 540px) {
+  .blog__card__h {
+    grid-template-columns: 1fr;
+    row-gap: 30px;
+  }
 }

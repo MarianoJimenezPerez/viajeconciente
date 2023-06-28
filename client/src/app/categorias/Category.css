@@ -49,3 +49,13 @@
     width: 100%;
   }
 }
+@media screen and (max-width: 540px) {
+  .category__page .container .left .category__heading {
+    flex-direction: column-reverse;
+    gap: 15px;
+  }
+  .category__page .container .left .category__heading select{
+    width: 50%;
+    align-self: flex-end;
+  }
+}

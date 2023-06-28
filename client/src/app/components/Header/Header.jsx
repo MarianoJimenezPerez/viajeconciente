@@ -1,4 +1,5 @@
 "use client";
+import { useRouter } from "next/navigation";
 import { useGlobalContext } from "@/app/context/context";
 import Link from "next/link";
 import { useState } from "react";
@@ -24,16 +25,28 @@ const links = [
 ];
 
 export default function Header() {
+  const router = useRouter();
+  const [q, setQ] = useState("");
   const [showMenu, setShowMenu] = useState(false);
   const { currentUser, logout } = useGlobalContext();
+
+  const handleSubmit = (e) => {
+    e.preventDefault()
+    router.push("/busqueda?q=" + q)
+    console.log(q);
+  };
+
   return (
     <header className="header container">
       <div className="logo">
         <h1>VC</h1>
       </div>
-      <form className="search">
-        <input type="text" placeholder="Buscar" />
-        <button type="submit">
+      <form
+        className="search"
+        onSubmit={(e) => handleSubmit(e)}
+      >
+        <input type="text" placeholder="Buscar" name="busqueda" id="busqueda" onChange={(e) => setQ(e.target.value)}/>
+        <button type="submit" onClick={(e) => handleSubmit(e)}>
           <AiOutlineSearch />
         </button>
       </form>

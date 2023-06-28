@@ -1,40 +1,34 @@
+import axios from "axios";
 import NewsletterVertical from "../NewsletterVertical/NewsletterVertical";
 import "./Categories.css";
-export default function Categories() {
+import CategoryBlog from "../CategoryBlog/CategoryBlog";
+
+const getCategoryBlogs = async (catId) => {
+  if (typeof catId !== "number") catId == 2;
+  try {
+    const postsResponse = await axios.get(
+      `http://localhost:8080/api/posts/category/${catId}`
+    );
+    const categoryResponse = await axios.get(
+      `http://localhost:8080/api/categories/${catId}`
+    );
+    return [postsResponse, categoryResponse];
+  } catch (error) {
+    console.log(error);
+    throw error;
+  }
+};
+export default async function Categories() {
+  const data = await getCategoryBlogs(2);
   return (
     <div className="categories">
       <div className="container">
         <div className="left">
-          <h5 className="categorie__title">What’s Trending</h5>
+          <h5 className="categorie__title">Viajes en familia</h5>
           <div className="categorie__blogs__container">
-            <div className="blog">
-              <div className="blog__img">
-                <img src="https://avada.website/magazine/wp-content/uploads/sites/166/2023/02/high-altitude-balloons.jpg" />
-                <span>World</span>
-              </div>
-              <div className="blog__content">
-                <h4>Hot Air Ballooning As An Alternative Means Of Travel</h4>
-                <p>
-                  Elementum nulla turpis cursus. Integer liberos kusto euismod
-                  aene pretium faucibus ...
-                </p>
-                <span>April 7, 2023</span>
-              </div>
-            </div>
-            <div className="blog">
-              <div className="blog__img">
-                <img src="https://avada.website/magazine/wp-content/uploads/sites/166/2023/02/high-altitude-balloons.jpg" />
-                <span>World</span>
-              </div>
-              <div className="blog__content">
-                <h4>Hot Air Ballooning As An Alternative Means Of Travel</h4>
-                <p>
-                  Elementum nulla turpis cursus. Integer liberos kusto euismod
-                  aene pretium faucibus ...
-                </p>
-                <span>April 7, 2023</span>
-              </div>
-            </div>
+            {data[0].data.map((blog) => (
+              <CategoryBlog data={blog} key={blog.id} cat={data[1].data.label} />
+            ))}
           </div>
         </div>
         <div className="right">

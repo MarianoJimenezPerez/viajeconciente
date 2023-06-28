@@ -1,17 +1,36 @@
 import Link from "next/link";
 import "./News.css";
 import BlogCard from "../BlogCard/BlogCard";
+import axios from "axios";
 
-export default function News() {
+const fetchData = async () => {
+  try {
+    const postResponse = await axios.get("http://localhost:8080/api/posts/type/2");
+    
+    const modifiedPosts = await Promise.all(
+      postResponse.data.map(async (blog) => {
+        const cid = blog.cid;
+        const categoryResponse = await axios.get(`http://localhost:8080/api/categories/${cid}`);
+        return { ...blog, cat: categoryResponse.data.label };
+      })
+    );
+    
+    return modifiedPosts;
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+export default async function News() {
+  const data = await fetchData();
+  console.log(data);
   return (
     <div className="news">
       <div className="container">
         <div className="left">
-          <h5>Popular News & Articles</h5>
+          <h5>Últimas novedades</h5>
           <div className="news__container">
-            <BlogCard />
-            <BlogCard />
-            <BlogCard />
+            {data && data.map((blog) => <BlogCard data={blog} key={blog.id} />)}
           </div>
         </div>
         <div className="right">
